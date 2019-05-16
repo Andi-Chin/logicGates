@@ -18,6 +18,9 @@
 // gameLoop();
 
 
+
+/*****welcome to my tutorial */
+
 //basically here's how you use it, I made a GBWrapper class to contain an input,
 //since typescript doesn't allow functions to have a parameter of types 'Gate' and 'boolean'
 //but yea, with the GBWrapper you can initialize an input that's either a 'Gate' or 'boolean'
