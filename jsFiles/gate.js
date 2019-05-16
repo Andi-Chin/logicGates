@@ -4,16 +4,24 @@ var GateType;
     GateType[GateType["OR"] = 1] = "OR";
     GateType[GateType["NAND"] = 2] = "NAND";
     GateType[GateType["NOT"] = 3] = "NOT";
+    GateType[GateType["X"] = 4] = "X";
 })(GateType || (GateType = {}));
 var Gate = /** @class */ (function () {
     // contructor function for gates that take 2 inputs
-    function Gate(name, inp1, inp2) {
+    function Gate(name) {
         this.name = name;
-        this.inp1 = inp1;
-        this.inp2 = inp2;
     }
     Gate.prototype.deepCopy = function () {
-        return new Gate(this.name, this.inp1.deepCopy(), this.inp2.deepCopy());
+        if (this.inp1 === undefined || this.inp2 === undefined) {
+            throw "why are you deep-copying this gate? The inputs still needs to be set";
+        }
+        else {
+            // newGate: Gate = new Gate(this.name, this.inp2.deepCopy());
+            var newGate = new Gate(this.name);
+            newGate.setInp1(this.inp1);
+            newGate.setInp2(this.inp2);
+            return newGate;
+        }
     };
     Gate.evaluateBool = function (gateName, inp1, inp2) {
         if (gateName == GateType.AND) {
@@ -27,6 +35,9 @@ var Gate = /** @class */ (function () {
         }
         else if (gateName == GateType.NOT) {
             return !inp1;
+        }
+        else if (gateName == GateType.X) {
+            return false;
         }
         else {
             // FIXME jk you don't need to fix this, unless the error occurs
@@ -59,13 +70,23 @@ var Gate = /** @class */ (function () {
         return this.inp1;
     };
     Gate.prototype.setInp1 = function (inp1) {
-        this.inp1 = inp1;
+        if (this.inp1 === undefined) {
+            this.inp1 = inp1;
+        }
+        else {
+            throw "inp1 is already defined wtf are you doing?";
+        }
     };
     Gate.prototype.getInp2 = function () {
         return this.inp2;
     };
     Gate.prototype.setInp2 = function (inp2) {
-        this.inp2 = inp2;
+        if (this.inp2 === undefined) {
+            this.inp2 = inp2;
+        }
+        else {
+            throw "inp2 is already defined wtf are you doing?";
+        }
     };
     return Gate;
 }());

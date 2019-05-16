@@ -1,14 +1,17 @@
-// class Wire {
-//     input: Gate;
-//     output: Gate;
-//     constructor(input: Gate, output: Gate) {
-//         this.input = input;
-//         this.output = output;
-//     }
-//     draw() {
-//         drawLine(this.input.x, this.input.y, this.output.x, this.output.y, 5);
-//     }
-// }
-// let wire: Wire = new Wire(new Gate('and', 3, 3, w),
-//                             new Gate('and', 10, 12, w));
-// wire.draw();
+var Wire = /** @class */ (function () {
+    function Wire(input, output) {
+        this.inpNode = input;
+        this.outNode = output;
+    }
+    Wire.prototype.run = function () {
+        this.outNode.getGate().evaluateGate(this.outNode.getGate().getInp1(), this.outNode.getGate().getInp2());
+        //TODO do this
+    };
+    Wire.prototype.getInput = function () {
+        return this.inpNode;
+    };
+    Wire.prototype.getOutput = function () {
+        return this.outNode;
+    };
+    return Wire;
+}());

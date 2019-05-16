@@ -1,5 +1,5 @@
 enum GateType {
-    AND, OR, NAND, NOT
+    AND, OR, NAND, NOT, X
 }
 
 class Gate {
@@ -8,14 +8,20 @@ class Gate {
     private inp1: GBWrapper;
     private inp2: GBWrapper;
     // contructor function for gates that take 2 inputs
-    constructor(name: GateType, inp1: GBWrapper, inp2: GBWrapper) {
+    public constructor(name: GateType) { // let's set the inputs after the wires have been connected
         this.name = name;
-        this.inp1 = inp1;
-        this.inp2 = inp2;
     }
 
     public deepCopy() : Gate {
-        return new Gate(this.name, this.inp1.deepCopy(), this.inp2.deepCopy());
+        if (this.inp1 === undefined || this.inp2 === undefined) {
+            throw "why are you deep-copying this gate? The inputs still needs to be set";
+        }else {
+            // newGate: Gate = new Gate(this.name, this.inp2.deepCopy());
+            let newGate: Gate = new Gate(this.name);
+            newGate.setInp1(this.inp1);
+            newGate.setInp2(this.inp2);
+            return newGate;
+        }
     }
 
     public static evaluateBool(gateName: GateType, inp1: boolean, inp2: boolean) : boolean {
@@ -27,6 +33,8 @@ class Gate {
             return !(inp1 && inp2);
         }else if (gateName == GateType.NOT) {
             return !inp1;
+        }else if (gateName == GateType.X) {  //you asked for this
+            return false;
         }
         else {
             // FIXME jk you don't need to fix this, unless the error occurs
@@ -71,7 +79,11 @@ class Gate {
     }
 
     public setInp1(inp1: GBWrapper) : void {
-        this.inp1 = inp1;
+        if (this.inp1 === undefined) {
+            this.inp1 = inp1;
+        }else {
+            throw "inp1 is already defined wtf are you doing?";
+        }
     }
 
     public getInp2() : GBWrapper {
@@ -79,7 +91,12 @@ class Gate {
     }
 
     public setInp2(inp2: GBWrapper) : void {
-        this.inp2 = inp2;
+        if (this.inp2 === undefined) {
+            this.inp2 = inp2;
+
+        }else {
+            throw "inp2 is already defined wtf are you doing?";
+        }
     }
 
     // draw() {
