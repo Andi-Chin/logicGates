@@ -1,19 +1,25 @@
-//the canvas setup is in utils.ts
-// let b: Board = new Board();
-// function gameLoop() {
-//     ctx.clearRect(0, 0, w, h);
-//     if (leftMouseClicked == true) {
-//         let tileAtMouse: Tile = b.getTileFromCoords(mouse.x, mouse.y);
-//         console.log(tileAtMouse);
-//         tileAtMouse.gate = new Gate('and', 
-//                                     Math.floor(mouse.x / b.tileSize) * b.tileSize, 
-//                                     Math.floor(mouse.y / b.tileSize) * b.tileSize, 
-//                                                 b.tileSize);
-//     }
-//     b.draw();
-//     requestAnimationFrame(gameLoop);
-// }
-// gameLoop();
+// the canvas setup is in utils.ts
+var b = new Board();
+function gameLoop() {
+    ctx.clearRect(0, 0, w, h);
+    if (leftMouseClicked == true) {
+        var tileAtMouse = b.getTileFromCoords(mouse.x, mouse.y);
+        console.log(tileAtMouse);
+        //   tileAtMouse.gate = new Gate('and', 
+        //                               Math.floor(mouse.x / b.tileSize) * b.tileSize, 
+        //                               Math.floor(mouse.y / b.tileSize) * b.tileSize, 
+        //                                           b.tileSize);
+        var newGate = new Gate(GateType.AND);
+        newGate.setInp1(new GBWrapper(false));
+        newGate.setInp2(new GBWrapper(true));
+        newGate.setX(Math.floor(mouse.x / Board.tileSize) * Board.tileSize);
+        newGate.setY(Math.floor(mouse.y / Board.tileSize) * Board.tileSize);
+        tileAtMouse.gate = newGate;
+    }
+    b.draw();
+    requestAnimationFrame(gameLoop);
+}
+gameLoop();
 /*********************welcome to my tutorial ***********************/
 //basically here's how you use it, I made a GBWrapper class to contain an input,
 //since typescript doesn't allow functions to have a parameter of types 'Gate' and 'boolean'

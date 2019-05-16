@@ -88,6 +88,38 @@ var Gate = /** @class */ (function () {
             throw "inp2 is already defined wtf are you doing?";
         }
     };
+    Gate.prototype.setX = function (x) {
+        if (this.x === undefined) {
+            this.x = x;
+        }
+        else {
+            throw "x has already been set";
+        }
+    };
+    Gate.prototype.setY = function (y) {
+        if (this.y === undefined) {
+            this.y = y;
+        }
+        else {
+            throw "y has already been set";
+        }
+    };
+    Gate.prototype.draw = function () {
+        if (this.name === GateType.OR) {
+        }
+        else if (this.name === GateType.AND) {
+            renderImage('./resources/andgate.png', this.x, this.y, Board.tileSize, Board.tileSize);
+        }
+        else {
+            alert('oopsies, something went wrong!');
+        }
+        /*
+            ______
+    -------|      \
+           |       |---------
+    -------|______/
+        */
+    };
     return Gate;
 }());
 /*

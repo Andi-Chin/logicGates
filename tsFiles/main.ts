@@ -1,21 +1,27 @@
-//the canvas setup is in utils.ts
-// let b: Board = new Board();
+// the canvas setup is in utils.ts
+let b: Board = new Board();
 
-// function gameLoop() {
-//     ctx.clearRect(0, 0, w, h);
+function gameLoop() {
+    ctx.clearRect(0, 0, w, h);
 
-//     if (leftMouseClicked == true) {
-//         let tileAtMouse: Tile = b.getTileFromCoords(mouse.x, mouse.y);
-//         console.log(tileAtMouse);
-//         tileAtMouse.gate = new Gate('and', 
-//                                     Math.floor(mouse.x / b.tileSize) * b.tileSize, 
-//                                     Math.floor(mouse.y / b.tileSize) * b.tileSize, 
-//                                                 b.tileSize);
-//     }
-//     b.draw();
-//     requestAnimationFrame(gameLoop);
-// }
-// gameLoop();
+    if (leftMouseClicked == true) {
+        let tileAtMouse: Tile = b.getTileFromCoords(mouse.x, mouse.y);
+        console.log(tileAtMouse);
+      //   tileAtMouse.gate = new Gate('and', 
+      //                               Math.floor(mouse.x / b.tileSize) * b.tileSize, 
+      //                               Math.floor(mouse.y / b.tileSize) * b.tileSize, 
+      //                                           b.tileSize);
+      let newGate: Gate = new Gate(GateType.AND);
+      newGate.setInp1(new GBWrapper(false));
+      newGate.setInp2(new GBWrapper(true));
+      newGate.setX(Math.floor(mouse.x / Board.tileSize) * Board.tileSize);
+      newGate.setY(Math.floor(mouse.y / Board.tileSize) * Board.tileSize);
+      tileAtMouse.gate = newGate;
+    }
+    b.draw();
+    requestAnimationFrame(gameLoop);
+}
+gameLoop();
 
 
 

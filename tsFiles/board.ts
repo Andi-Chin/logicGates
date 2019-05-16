@@ -1,20 +1,20 @@
 class Board {
-    board: Array<Array<Tile>> = [];
-    size: number = 15;
-    tileSize: number = w / 15;
+    private board: Array<Array<Tile>> = [];
+    public static readonly size: number = 15;
+    public static readonly tileSize: number = w / 15;
     constructor() {
-        for (let y: number = 0; y < this.size; y++) {
+        for (let y: number = 0; y < Board.size; y++) {
             this.board.push([]);
-            for (let x: number = 0; x < this.size; x++) {
+            for (let x: number = 0; x < Board.size; x++) {
                 this.board[y].push(new Tile(x, y, undefined));
             }
         }
     }
 
     draw() {
-        for (let y: number = 0; y < this.size; y++) {
-            for (let x: number = 0; x < this.size; x++) {
-                ctx.strokeRect(x * this.tileSize, y * this.tileSize, this.tileSize, this.tileSize);
+        for (let y: number = 0; y < Board.size; y++) {
+            for (let x: number = 0; x < Board.size; x++) {
+                ctx.strokeRect(x * Board.tileSize, y * Board.tileSize, Board.tileSize, Board.tileSize);
                 if (this.board[y][x].gate) {
                     this.board[y][x].gate.draw();
                 }
@@ -23,8 +23,11 @@ class Board {
     }
 
     getTileFromCoords(x: number, y: number) {
-        return this.board[Math.floor(y / this.tileSize)][Math.floor(x / this.tileSize)];
+        return this.board[Math.floor(y / Board.tileSize)][Math.floor(x / Board.tileSize)];
     }
+
+
+
 
 }
 

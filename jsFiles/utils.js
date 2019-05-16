@@ -1,3 +1,7 @@
+var gameStates = {
+    placingGates: true,
+    placingWires: false
+};
 // Canvas setup
 var c = document.getElementById("canvas idk");
 var ctx = c.getContext('2d');

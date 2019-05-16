@@ -1,3 +1,8 @@
+var gameStates = {
+	placingGates: true,  // whether the user is currently placing gates
+	placingWires: false,  // whether the user is currently placing wires
+}
+
 // Canvas setup
 let c: HTMLCanvasElement = <HTMLCanvasElement>document.getElementById("canvas idk");
 let ctx: CanvasRenderingContext2D = c.getContext('2d');

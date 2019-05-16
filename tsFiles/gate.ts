@@ -7,6 +7,8 @@ class Gate {
     private name: GateType;
     private inp1: GBWrapper;
     private inp2: GBWrapper;
+    private x: number;
+    private y: number;
     // contructor function for gates that take 2 inputs
     public constructor(name: GateType) { // let's set the inputs after the wires have been connected
         this.name = name;
@@ -98,22 +100,36 @@ class Gate {
             throw "inp2 is already defined wtf are you doing?";
         }
     }
+    public setX(x: number) : void {
+        if (this.x === undefined) {
+            this.x = x;
+        }else {
+            throw "x has already been set";
+        }
+    }
+    public setY(y: number) : void {
+        if (this.y === undefined) {
+            this.y = y;
+        }else {
+            throw "y has already been set";
+        }
+    }
 
-    // draw() {
-    //     if (this.name === GateType.OR) {
+    draw() {
+        if (this.name === GateType.OR) {
 
-    //     } else if (this.name === GateType.AND) {
-    //         renderImage('./resources/andgate.png', this.x, this.y, this.tileSize, this.tileSize);
-    //     } else {
-    //         alert('oopsies, something went wrong!');
-    //     }
-    //     /*
-    //         ______ 
-    // -------|      \
-    //        |       |--------- 
-    // -------|______/
-    //     */
-    // }
+        } else if (this.name === GateType.AND) {
+            renderImage('./resources/andgate.png', this.x, this.y, Board.tileSize , Board.tileSize);
+        } else {
+            alert('oopsies, something went wrong!');
+        }
+        /*
+            ______ 
+    -------|      \
+           |       |--------- 
+    -------|______/
+        */
+    }
 }
 
 
